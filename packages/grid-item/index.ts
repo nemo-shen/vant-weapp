@@ -5,7 +5,7 @@ import { link } from '../mixins/link';
 VantComponent({
   relation: useParent('grid'),
 
-  classes: ['content-class', 'icon-class', 'text-class'],
+  classes: ['useVirtualHost', 'content-class', 'icon-class', 'text-class'],
 
   mixins: [link],
 

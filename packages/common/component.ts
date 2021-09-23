@@ -58,6 +58,11 @@ function VantComponent<
     addGlobalClass: true,
   };
 
+  if (options.externalClasses.indexOf('useVirtualHost') !== -1) {
+    options.options.virtualHost = true;
+    console.log(options.options);
+  }
+
   Component(options);
 }
 
