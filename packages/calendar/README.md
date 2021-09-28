@@ -270,9 +270,9 @@ Page({
 | type | 选择类型:<br>`single`表示选择单个日期，<br>`multiple`表示选择多个日期，<br>`range`表示选择日期区间 | _string_ | `single` |
 | title | 日历标题 | _string_ | `日期选择` |
 | color | 主题色，对底部按钮和选中日期生效 | _string_ | `#ee0a24` |
-| min-date | 可选择的最小日期 | _number_ | 当前日期 |
-| max-date | 可选择的最大日期 | _number_ | 当前日期的六个月后 |
-| default-date | 默认选中的日期，`type`为`multiple`或`range`时为数组 | _number \| number[]_ | 今天 |
+| min-date | 可选择的最小日期 | _timestamp_ | 当前日期 |
+| max-date | 可选择的最大日期 | _timestamp_ | 当前日期的六个月后 |
+| default-date | 默认选中的日期，`type`为`multiple`或`range`时为数组 | _timestamp \| timestamp[]_ | 今天 |
 | row-height | 日期行高 | _number \| string_ | `64` |
 | formatter | 日期格式化函数 | _(day: Day) => Day_ | - |
 | poppable | 是否以弹层的形式展示日历 | _boolean_ | `true` |
@@ -286,7 +286,7 @@ Page({
 
 ### Poppable Props
 
-当 Canlendar 的 `poppable` 为 `true` 时，支持以下 props:
+当 Calendar 的 `poppable` 为 `true` 时，支持以下 props:
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -298,7 +298,7 @@ Page({
 
 ### Range Props
 
-当 Canlendar 的 `type` 为 `range` 时，支持以下 props:
+当 Calendar 的 `type` 为 `range` 时，支持以下 props:
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -318,19 +318,21 @@ Page({
 | text | 中间显示的文字 | _string_ |
 | topInfo | 上方的提示信息 | _string_ |
 | bottomInfo | 下方的提示信息 | _string_ |
+| className | 自定义 className | _string_ |
 
 ### Events
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
 | select | 点击任意日期时触发 | _value: Date \| Date[]_ |
-| unselect | 当 Canlendar 的 `type` 为 `multiple` 时,点击已选中的日期时触发 | _value: Date_ |
+| unselect | 当 Calendar 的 `type` 为 `multiple` 时,点击已选中的日期时触发 | _value: Date_ |
 | confirm | 日期选择完成后触发，若`show-confirm`为`true`，则点击确认按钮后触发 | _value: Date \| Date[]_ |
 | open | 打开弹出层时触发 | - |
 | close | 关闭弹出层时触发 | - |
 | opened | 打开弹出层且动画结束后触发 | - |
 | closed | 关闭弹出层且动画结束后触发 | - |
 | over-range | 范围选择超过最多可选天数时触发 | - |
+| click-subtitle `v1.8.1` | 点击日历副标题时触发 | _WechatMiniprogram.TouchEvent_ |
 
 ### Slots
 

@@ -51,25 +51,44 @@
 <van-icon name="chat" size="50px" />
 ```
 
-## 常见问题
+### 自定义图标
 
-### 开发者工具上提示 Failed to load font 是什么情况？
+如果需要在现有 Icon 的基础上使用更多图标，可以引入第三方 iconfont 对应的字体文件和 CSS 文件，之后就可以在 Icon 组件中直接使用。例如，可以在 `app.wxss` 文件中引入。
 
-这个是开发者工具本身的问题，可以忽略，具体可以查看[微信小程序文档](https://developers.weixin.qq.com/miniprogram/dev/api/ui/font/wx.loadFontFace.html) - 注意事项第 5 条。
+```css
+/* 引入第三方或自定义的字体图标样式 */
+@font-face {
+  font-family: 'my-icon';
+  src: url('./my-icon.ttf') format('truetype');
+}
+
+.my-icon {
+  font-family: 'my-icon';
+}
+
+.my-icon-extra::before {
+  content: '\e626';
+}
+```
+
+```html
+<!-- 通过 class-prefix 指定类名为 my-icon -->
+<van-icon class-prefix="my-icon" name="extra" />
+```
 
 ## API
 
 ### Props
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| name | 图标名称或图片链接 | _string_ | - | - |
-| dot | 是否显示图标右上角小红点 | _boolean_ | `false` | - |
-| info | 图标右上角文字提示 | _string \| number_ | - | - |
-| color | 图标颜色 | _string_ | `inherit` | - |
-| size | 图标大小，如 `20px`，`2em`，默认单位为`px` | _string \| number_ | `inherit` | - |
-| custom-style | 自定义样式 | _string_ | - | - |
-| class-prefix | 类名前缀 | _string_ | `van-icon` | - |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| name | 图标名称或图片链接 | _string_ | - |
+| dot | 是否显示图标右上角小红点 | _boolean_ | `false` |
+| info | 图标右上角文字提示 | _string \| number_ | - |
+| color | 图标颜色 | _string_ | `inherit` |
+| size | 图标大小，如 `20px`，`2em`，默认单位为`px` | _string \| number_ | `inherit` |
+| custom-style | 自定义样式 | _string_ | - |
+| class-prefix | 类名前缀 | _string_ | `van-icon` |
 
 ### Events
 
@@ -82,3 +101,9 @@
 | 类名         | 说明         |
 | ------------ | ------------ |
 | custom-class | 根节点样式类 |
+
+## 常见问题
+
+### 开发者工具上提示 Failed to load font 是什么情况？
+
+这个是开发者工具本身的问题，可以忽略，具体可以查看[微信小程序文档](https://developers.weixin.qq.com/miniprogram/dev/api/ui/font/wx.loadFontFace.html) - 注意事项第 5 条。

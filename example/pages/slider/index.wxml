@@ -6,6 +6,15 @@
   />
 </demo-block>
 
+<demo-block title="双滑块">
+  <van-slider
+    range
+    value="{{ [20, 60 ] }}"
+    custom-class="slider"
+    bind:change="onChange"
+  />
+</demo-block>
+
 <demo-block title="指定选择范围">
   <van-slider
     custom-class="slider"
@@ -53,4 +62,22 @@
       {{ currentValue }}
     </view>
   </van-slider>
+</demo-block>
+
+<demo-block title="垂直方向">
+  <view style="height: 150px; padding-left: 30px;">
+    <van-slider
+      value="{{ 50 }}"
+      vertical
+      custom-class="slider"
+      bind:change="onChange"
+    />
+    <van-slider
+      value="{{ [20, 60 ] }}"
+      vertical
+      range
+      custom-class="slider"
+      bind:change="onChange"
+    />
+  </view>
 </demo-block>

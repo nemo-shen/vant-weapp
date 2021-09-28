@@ -44,6 +44,14 @@ VantComponent({
       type: Boolean,
       value: true,
     },
+    clearTrigger: {
+      type: String,
+      value: 'focus',
+    },
+    clearIcon: {
+      type: String,
+      value: 'clear',
+    },
   },
 
   methods: {
@@ -82,6 +90,10 @@ VantComponent({
 
     onClear(event: WechatMiniprogram.CustomEvent) {
       this.$emit('clear', event.detail);
+    },
+
+    onClickInput(event) {
+      this.$emit('click-input', event.detail);
     },
   },
 });

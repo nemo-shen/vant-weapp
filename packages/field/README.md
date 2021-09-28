@@ -256,6 +256,7 @@ Page({
 | auto-focus | 自动聚焦，拉起键盘 | _boolean_ | `false` |
 | disable-default-padding | 是否去掉 iOS 下的默认内边距，只对 textarea 有效 | _boolean_ | `true` |
 | cursor | 指定 focus 时的光标位置 | _number_ | `-1` |
+| clear-trigger `v1.8.4` | 显示清除图标的时机，`always` 表示输入框不为空时展示，<br>`focus` 表示输入框聚焦且不为空时展示 | _string_ | `focus` |
 
 ### Events
 

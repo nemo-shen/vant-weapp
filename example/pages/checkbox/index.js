@@ -12,20 +12,14 @@ Page({
     result: ['a', 'b'],
     result2: [],
     result3: [],
+    result4: [],
     activeIcon: 'https://img.yzcdn.cn/vant/user-active.png',
-    inactiveIcon: 'https://img.yzcdn.cn/vant/user-inactive.png'
+    inactiveIcon: 'https://img.yzcdn.cn/vant/user-inactive.png',
   },
 
   onChange(event) {
     const { key } = event.currentTarget.dataset;
     this.setData({ [key]: event.detail });
-  },
-
-  onClick(event) {
-    const { value } = event.currentTarget.dataset;
-    this.setData({
-      radio3: value
-    });
   },
 
   toggle(event) {
@@ -34,5 +28,5 @@ Page({
     checkbox.toggle();
   },
 
-  noop() {}
+  noop() {},
 });

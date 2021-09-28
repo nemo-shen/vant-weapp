@@ -53,16 +53,14 @@ Empty 组件内置了多种占位图片类型，可以在不同业务场景下�
 
 ```html
 <van-empty description="描述文字">
-  <van-button round type="danger" class="bottom-button">
-    按钮
-  </van-button>
+  <van-button round type="danger" class="bottom-button">按钮</van-button>
 </van-empty>
 
 <style>
-.bottom-button {
-  width: 160px;
-  height: 40px;
-}
+  .bottom-button {
+    width: 160px;
+    height: 40px;
+  }
 </style>
 ```
 

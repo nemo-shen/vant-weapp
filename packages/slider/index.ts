@@ -1,12 +1,15 @@
 import { VantComponent } from '../common/component';
 import { touch } from '../mixins/touch';
 import { canIUseModel } from '../common/version';
-import { getRect } from '../common/utils';
+import { getRect, addUnit } from '../common/utils';
+
+type SliderValue = number | [number, number];
 
 VantComponent({
   mixins: [touch],
 
   props: {
+    range: Boolean,
     disabled: Boolean,
     useButtonSlot: Boolean,
     activeColor: String,
@@ -24,7 +27,7 @@ VantComponent({
       value: 1,
     },
     value: {
-      type: Number,
+      type: null,
       value: 0,
       observer(val) {
         if (val !== this.value) {
@@ -32,10 +35,8 @@ VantComponent({
         }
       },
     },
-    barHeight: {
-      type: null,
-      value: 2,
-    },
+    vertical: Boolean,
+    barHeight: null,
   },
 
   created() {
@@ -46,8 +47,23 @@ VantComponent({
     onTouchStart(event: WechatMiniprogram.TouchEvent) {
       if (this.data.disabled) return;
 
+      const { index } = event.currentTarget.dataset;
+      if (typeof index === 'number') {
+        this.buttonIndex = index;
+      }
+
       this.touchStart(event);
       this.startValue = this.format(this.value);
+      this.newValue = this.value;
+
+      if (this.isRange(this.newValue)) {
+        this.startValue = this.newValue.map((val) => this.format(val)) as [
+          number,
+          number
+        ];
+      } else {
+        this.startValue = this.format(this.newValue);
+      }
       this.dragStatus = 'start';
     },
 
@@ -62,8 +78,17 @@ VantComponent({
       this.dragStatus = 'draging';
 
       getRect(this, '.van-slider').then((rect) => {
-        const diff = (this.deltaX / rect.width) * this.getRange();
-        this.newValue = this.startValue + diff;
+        const { vertical } = this.data;
+        const delta = vertical ? this.deltaY : this.deltaX;
+        const total = vertical ? rect.height : rect.width;
+        const diff = (delta / total) * this.getRange();
+
+        if (this.isRange(this.startValue)) {
+          (this.newValue as [number, number])[this.buttonIndex] =
+            this.startValue[this.buttonIndex] + diff;
+        } else {
+          this.newValue = this.startValue + diff;
+        }
         this.updateValue(this.newValue, false, true);
       });
     },
@@ -83,22 +108,65 @@ VantComponent({
       const { min } = this.data;
 
       getRect(this, '.van-slider').then((rect) => {
-        const value =
-          ((event.detail.x - rect.left) / rect.width) * this.getRange() + min;
-        this.updateValue(value, true);
+        const { vertical } = this.data;
+        const touch = event.touches[0];
+        const delta = vertical
+          ? touch.clientY - rect.top
+          : touch.clientX - rect.left;
+        const total = vertical ? rect.height : rect.width;
+        const value = Number(min) + (delta / total) * this.getRange();
+
+        if (this.isRange(this.value)) {
+          const [left, right] = this.value;
+          const middle = (left + right) / 2;
+
+          if (value <= middle) {
+            this.updateValue([value, right], true);
+          } else {
+            this.updateValue([left, value], true);
+          }
+        } else {
+          this.updateValue(value, true);
+        }
       });
     },
 
-    updateValue(value: number, end?: boolean, drag?: boolean) {
-      value = this.format(value);
-      const { min } = this.data;
-      const width = `${((value - min) * 100) / this.getRange()}%`;
+    isRange(val: unknown): val is [number, number] {
+      const { range } = this.data;
+      return range && Array.isArray(val);
+    },
+
+    handleOverlap(value: [number, number]) {
+      if (value[0] > value[1]) {
+        return value.slice(0).reverse();
+      }
+      return value;
+    },
+
+    updateValue(value: SliderValue, end?: boolean, drag?: boolean) {
+      if (this.isRange(value)) {
+        value = this.handleOverlap(value).map((val) => this.format(val)) as [
+          number,
+          number
+        ];
+      } else {
+        value = this.format(value);
+      }
 
       this.value = value;
 
+      const { vertical } = this.data;
+      const mainAxis = vertical ? 'height' : 'width';
+
       this.setData({
+        wrapperStyle: `
+          background: ${this.data.inactiveColor || ''};
+          ${vertical ? 'width' : 'height'}: ${addUnit(this.data.barHeight) || ''};
+        `,
         barStyle: `
-          width: ${width};
+          ${mainAxis}: ${this.calcMainAxis()};
+          left: ${vertical ? 0 : this.calcOffset()};
+          top: ${vertical ? this.calcOffset() : 0};
           ${drag ? 'transition: none;' : ''}
         `,
       });
@@ -116,9 +184,35 @@ VantComponent({
       }
     },
 
+    getScope() {
+      return Number(this.data.max) - Number(this.data.min);
+    },
+
     getRange() {
       const { max, min } = this.data;
       return max - min;
+    },
+
+    // 计算选中条的长度百分比
+    calcMainAxis() {
+      const { value } = this;
+      const { min } = this.data;
+      const scope = this.getScope();
+      if (this.isRange(value)) {
+        return `${((value[1] - value[0]) * 100) / scope}%`;
+      }
+      return `${((value - Number(min)) * 100) / scope}%`;
+    },
+
+    // 计算选中条的开始位置的偏移量
+    calcOffset() {
+      const { value } = this;
+      const { min } = this.data;
+      const scope = this.getScope();
+      if (this.isRange(value)) {
+        return `${((value[0] - Number(min)) * 100) / scope}%`;
+      }
+      return '0%';
     },
 
     format(value: number) {

@@ -21,9 +21,7 @@
 将元素包裹在 transition 组件内，在元素展示/隐藏时，会有相应的过渡动画。
 
 ```html
-<van-transition show="{{ show }}" custom-class="block">
-  内容
-</van-transition>
+<van-transition show="{{ show }}" custom-class="block">内容</van-transition>
 ```
 
 ### 动画类型
@@ -67,12 +65,12 @@ transition 组件内置了多种动画，可以通过`name`字段指定动画类
 
 ### Props
 
-| 参数         | 说明                 | 类型               | 默认值 | 版本 |
-| ------------ | -------------------- | ------------------ | ------ | ---- |
-| name         | 动画类型             | _string_           | `fade` | -    |
-| show         | 是否展示组件         | _boolean_          | `true` | -    |
-| duration     | 动画时长，单位为毫秒 | _number \| object_ | `300`  | -    |
-| custom-style | 自定义样式           | _string_           | -      | -    |
+| 参数         | 说明                 | 类型               | 默认值 |
+| ------------ | -------------------- | ------------------ | ------ |
+| name         | 动画类型             | _string_           | `fade` |
+| show         | 是否展示组件         | _boolean_          | `true` |
+| duration     | 动画时长，单位为毫秒 | _number \| object_ | `300`  |
+| custom-style | 自定义样式           | _string_           | -      |
 
 ### Events
 
