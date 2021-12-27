@@ -128,10 +128,6 @@ export default [
         title: 'Swipe 轮播',
       },
       {
-        path: '/swipe-cell',
-        title: 'SwipeCell 滑动单元格',
-      },
-      {
         path: '/toast',
         title: 'Toast 轻提示',
       },
@@ -184,6 +180,10 @@ export default [
       {
         path: '/sticky',
         title: 'Sticky 粘性布局',
+      },
+      {
+        path: '/swipe-cell',
+        title: 'SwipeCell 滑动单元格',
       },
       {
         path: '/tag',
