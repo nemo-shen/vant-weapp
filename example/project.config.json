@@ -397,6 +397,13 @@
           "scene": null
         },
         {
+          "id": -1,
+          "name": "swipe",
+          "pathName": "pages/swipe/index",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "col",
           "pathName": "pages/col/index",
           "query": "",

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "demo-block": "../../../example/components/demo-block/index"
+  }
+}

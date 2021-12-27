@@ -124,6 +124,10 @@ export default [
         title: 'ShareSheet 分享面板',
       },
       {
+        path: '/swipe',
+        title: 'Swipe 轮播',
+      },
+      {
         path: '/swipe-cell',
         title: 'SwipeCell 滑动单元格',
       },
