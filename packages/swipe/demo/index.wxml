@@ -1,3 +1,15 @@
-<demo-block title="轮播图">
-  swipe demo empty
+<demo-block title="基础用法">
+  <van-swipe class="my-swipe" autoplay="{{ 3000 }}">
+    <block>
+      <swiper-item>
+        <view class="swiper-item">1</view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item">2</view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item">3</view>
+      </swiper-item>
+    </block>
+  </van-swipe>
 </demo-block>

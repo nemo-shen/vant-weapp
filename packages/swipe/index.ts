@@ -1,5 +1,10 @@
 import { VantComponent } from '../common/component';
 
 VantComponent({
-  props: {},
+  props: {
+    autoplay: {
+      type: Number,
+      default: 0,
+    },
+  },
 });

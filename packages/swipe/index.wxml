@@ -1,1 +1,3 @@
-swipe component
+<swiper autoplay="{{ autoplay > 0 }}" interval="{{ autoplay }}">
+  <slot />
+</swiper>
