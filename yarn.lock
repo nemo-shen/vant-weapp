@@ -2409,10 +2409,10 @@
     eslint-plugin-markdown "^2.2.0"
     eslint-plugin-vue "^7.15.2"
 
-"@vant/icons@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.npmjs.org/@vant/icons/-/icons-1.7.1.tgz#49ae420302b5581e54e6894891e5a05bc76e9f87"
-  integrity sha512-66LPEq89w4kl258nALZcRNd14eUJC8VajvTJwvZKOaZawz6CUeVZ6ybhedTUhQhRjeA8SyWD7dFt4ALf33Sabw==
+"@vant/icons@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-2.0.0.tgz#7fcecb3b53811e269bdd11e19ee72ff2ca698630"
+  integrity sha512-w2VlRGAyH3X++CqEhBkZmW1U6O4A6peXXPpki0zVtXfJbXKIzFBZW0TRsA160IGeDcmuUX0N6tpUS50i+2S3AA==
 
 "@vant/markdown-vetur@^2.2.0":
   version "2.2.0"

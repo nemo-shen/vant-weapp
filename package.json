@@ -40,7 +40,7 @@
   "homepage": "https://github.com/youzan/vant-weapp#readme",
   "devDependencies": {
     "@vant/cli": "^4.0.0-beta.7",
-    "@vant/icons": "^1.7.1",
+    "@vant/icons": "^2.0.0",
     "gulp": "^4.0.2",
     "gulp-insert": "^0.5.0",
     "gulp-less": "^5.0.0",
